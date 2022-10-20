@@ -1,0 +1,62 @@
+<!--
+ * @Date: 2022-06-18 09:21:14
+ * @LastEditors: xuanyi_ge xuanyige87@gmail.com
+ * @LastEditTime: 2022-06-18 09:33:55
+ * @FilePath: \undefinedc:\Users\gxy\Desktop\HTML\flex-num.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      display: flex;
+      justify-content: center;
+    }
+    .container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80vw;
+    }
+    .box{
+      height: 50vh;
+      margin: 10px;
+      flex:0.5;
+      border-radius: 50px;
+      -webkit-transition: all ease-in 700ms;
+    }
+    .box:nth-child(1){
+      background-color: red;
+    }
+    .box:nth-child(2){
+      background-color: antiquewhite;
+    }
+    .active{
+      flex:3
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box active">
+    </div>
+    <div class="box">
+    </div>
+  </div>
+</body>
+<script>
+  divs = document.querySelectorAll(".box")
+  divs.forEach(element => {
+    element.addEventListener('click',()=>{
+      for(let i = 0;i<divs.length;i++){
+        divs[i].className = "box"
+      }
+      element.className = "box active"
+    })
+  });
+</script>
+</html>

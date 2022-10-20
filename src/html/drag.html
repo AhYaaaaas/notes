@@ -1,0 +1,71 @@
+<!--
+ * @Date: 2022-08-08 01:14:26
+ * @LastEditors: xuanyi_ge xuanyige87@gmail.com
+ * @LastEditTime: 2022-08-08 02:03:17
+ * @FilePath: \undefinedc:\Users\gxy\Desktop\HTML\drag.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      display: flex;
+      flex-direction: row;
+    }
+    .part{
+      height: 300px;
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .left{
+      background-color: red;
+    }
+    .right{
+      background-color: greenyellow;
+    }
+    .inner{
+      width: 50px;
+      height: 50px;
+      background-color: bisque;
+    }
+  </style>
+</head>
+<body>
+  <div class="part left" draggable = "true">
+    <div class="inner" draggable="true"></div>
+  </div>
+  <div class="part right" draggable="true">
+    <div class="inner" draggable="true"></div>
+  </div>
+</body>
+<script>
+  let left = document.querySelector('.left'),
+      right = document.querySelector('.right'),
+      left_inner = document.querySelector('.left .inner'),
+      right_inner = document.querySelector('.right .inner'),
+      dragItem = null;
+  [left,right,left_inner,right_inner].forEach(item => {
+    item.addEventListener('dragover',(e)=>{
+      e.preventDefault();
+    })
+    item.addEventListener('dragleave',(e)=>{
+      e.preventDefault();
+    })
+  });
+  left_inner.addEventListener('dragstart',(e)=>{
+    dragItem = e
+  })
+  right.addEventListener('drop',(e)=>{
+    e.target.appendChild(dragItem.target)
+  })
+  left.addEventListener('drop',(e)=>{
+    e.target.appendChild(dragItem.target)
+  })
+</script>
+</html>

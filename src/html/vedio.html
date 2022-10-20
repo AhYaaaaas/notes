@@ -1,0 +1,54 @@
+<!--
+ * @Date: 2022-06-09 20:45:46
+ * @LastEditors: xuanyi_ge xuanyige87@gmail.com
+ * @LastEditTime: 2022-06-09 20:46:25
+ * @FilePath: \undefinedc:\Users\gxy\Desktop\vedio.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      position: absolute;
+      left: 0;
+      z-index: 111;
+    }
+  </style>
+</head>
+<body>
+  <video src="" muted></video>
+  <canvas id="canvas" width="500px" height="500px"></canvas>
+  <button id="getImag" disabled>getImag</button>
+  <img src="" alt="" id="new_image">
+</body>
+<script>
+// 想要获取一个最接近 1280x720 的相机分辨率
+let constraints = { audio: true, video: { width: 500, height: 500 } };
+let canvas = document.getElementById('canvas')
+var video = document.querySelector('video');
+let ctx = canvas.getContext('2d')
+// 点击绘画
+let btn = document.getElementById('getImag')
+  btn.addEventListener('click',()=>{
+    ctx.drawImage(video,0,0)
+    let dataURL = canvas.toDataURL('image/jpeg');
+    new_image.src = dataURL
+    video.pause()
+  })
+//开启监控
+navigator.mediaDevices.getUserMedia(constraints)
+.then(function(mediaStream) {
+  video.srcObject = mediaStream;
+  video.onloadedmetadata = function(e) {
+    video.play();
+  };
+  btn.disabled = false
+})
+.catch(function(err) { console.log(err.name + ": " + err.message); }); // 总是在最后检查错误
+
+</script>
+</html>

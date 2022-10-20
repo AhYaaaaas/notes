@@ -1,0 +1,109 @@
+<!--
+ * @Date: 2022-06-10 17:08:03
+ * @LastEditors: xuanyi_ge xuanyige87@gmail.com
+ * @LastEditTime: 2022-06-10 17:59:55
+ * @FilePath: \undefinedc:\Users\gxy\Desktop\roll.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .app{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 400px;
+        padding: 0;
+      }
+      li {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        margin-top: 10px;
+        list-style-type: none;
+        text-align: center;
+        line-height: 100px;
+        user-select: none;
+        background-color: skyblue;
+      }
+      li:nth-child(5){
+        cursor: pointer;
+        background-color: red;
+      }
+      .active {
+        background-color: orange;
+      }
+      .info{
+        width: 400px;
+        height: 50px;
+        border: 1px solid black;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="info"></div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>GO</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    var indexArr,index,timer,title,initalSpeed,times,
+        lis = document.querySelectorAll("li");
+    function roll() {
+      initalSpeed = 350 - times * 10; 
+      lis.forEach((item) => {
+        item.className = "";
+      });
+      lis[indexArr[index % 8]].className = "active";
+      index++;
+      if (times !== 0) {
+        timer = setTimeout(() => {
+          window.requestAnimationFrame(roll);
+        }, initalSpeed);
+        times--;
+      }else{
+        lis.forEach((item)=>{
+          if(item.className === "active"){
+            title.innerHTML = `恭喜你！获得奖品：${item.innerHTML}`;
+          }
+        });
+      }
+    }
+    lis[4].addEventListener('click',()=>{
+      init();
+      window.requestAnimationFrame(roll);
+    })
+    function init(){
+      indexArr = [0, 1, 2, 5, 8, 7, 6, 3];
+      index = index || Math.floor(Math.random() * 7);
+      times = Math.floor(10 + Math.random() * 20);
+      title = document.querySelector(".info");
+      initalSpeed;
+      timer = null;
+    }
+  </script>
+</html>

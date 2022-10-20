@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <style>
+        html{
+            height: 100%;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            background-color: hotpink;
+        }
+        .search{
+            height: 50px;
+            display: flex;
+        /*
+            脱离文档流不然会撑开
+        */
+        }
+        .search input{
+            height: 100%;
+            width: 0;
+            font-size: 18px;
+            border: none;
+            padding: 10px;
+            transition: width ease 0.3s;
+        }
+        .search .btn{
+            height: 50px;
+            width: 50px;
+            font-size: 18px;
+            background-color: white;
+            border: none;
+            position: absolute;
+            padding: 15px;
+            transition: transform ease 0.3s;
+        }
+        .search .btn:hover{
+            cursor: pointer;
+        }
+        .search input:focus,
+        .search .btn:focus{
+            outline: none;
+        }
+         .active input{
+            width: 200px;
+        }
+         .active .btn{
+             transform: translateX(192px);
+         }
+    </style>
+</head>
+<body>
+    <div class="search">
+        <input type="text" placeholder="Search...">
+        <button class="btn">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</body>
+<script>
+    var search = document.querySelector('.search'),
+        input = document.querySelector('.search input'),
+        btn = document.querySelector('.search .btn')
+    btn.addEventListener('click',()=>{
+        search.classList.toggle('active')
+        input.focus()
+    })
+</script>
+</html>

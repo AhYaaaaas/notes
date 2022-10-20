@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <input type="submit" value="点击提交" id="input">
+</body>
+<script>
+    const btn = document.getElementById("input")
+    function submit(e){
+        console.log(1);
+    }
+    function load(fn,delay){
+        let beginTime = 0
+        return function(){
+            let curTime = new Date().getTime()
+            if(curTime - beginTime > delay){
+                fn()
+            }
+            beginTime = new Date().getTime()
+        }
+    }
+    btn.addEventListener('click',load(submit,1000),false)
+</script>
+</html>

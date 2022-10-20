@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        :root{
+            --normal-size:50%;
+            --hover-size:75%;
+            --leave-size:25%;
+            --right-hover-color:rgba(28, 122, 28, 1);
+            --right-leave-color:rgba(43, 43, 43, 0.8);
+            --left-hover-color:rgba(87, 84, 236, 1);
+            --left-leave-color:rgba(87, 84, 236, 0.7) ;
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container{
+            display: flex;
+        }
+        .split{
+            height: 100vh;
+            width: var(--normal-size);
+            position: relative;
+            transition:  all ease 1s;
+        }
+
+        .left{
+            background: url("./assets/JPG/ps.jpg") no-repeat;
+            background-size: cover;
+            background-color: var(--left-leave-color);
+        }
+        .right{
+            background: url("./assets/JPG/xbox.jpg") no-repeat;
+            background-size: cover;
+        }
+        h1{
+            position: absolute;
+            font-size: 4rem;
+            left: 50%;
+            top: 20%;
+            color: white;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        .split a{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            width: 15rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.2rem solid white;
+        }
+        /*
+            给它再来一层用来上色
+        */
+        .left::before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            background-color: var(--left-leave-color);
+            position: absolute;
+        }
+        .right a{
+            background-color: var(--right-leave-color);
+        }
+        .right a:hover{
+            background-color: var(--right-hover-color);
+        }
+        .left a:hover{
+            background-color: var(--left-hover-color);
+        }
+        .right-hover .right{
+            width: var(--hover-size);
+        }
+        .right-hover .left{
+            width: var(--leave-size);
+        }
+        .left-hover .left{
+            width:var(--hover-size)
+        }
+        .left-hover .right{
+            width:var(--leave-size)
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="split left">
+            <h1>Playstation 5</h1>
+            <a href="#">BUY NOW</a>
+        </div>
+        <div class="split right">
+            <h1>XBox Series X</h1>
+            <a href="#">BUY NOW</a>
+        </div>
+    </div>
+</body>
+<script>
+    var container = document.querySelector('.container'),
+        left = document.querySelector('.left'),
+        right = document.querySelector('.right')
+    function generator(Node,NodeName){
+        Node.addEventListener('mouseover',()=>{
+            container.classList.toggle(`${NodeName}-hover`)
+        })
+        Node.addEventListener('mouseout',()=>{
+            container.classList.toggle(`${NodeName}-hover`)
+        })
+    }
+    generator(left,'left')
+    generator(right,'right')
+</script>
+</html>
